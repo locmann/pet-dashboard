@@ -1,8 +1,11 @@
-import Button from "../../ui/Button.jsx";
+import Button from '../../ui/Button.ts';
 
 function CheckoutButton({ bookingId }) {
   return (
-    <Button variation="primary" size="small">
+    <Button
+      variation="primary"
+      size="small"
+    >
       Check out
     </Button>
   );

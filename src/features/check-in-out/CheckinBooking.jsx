@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import BookingDataBox from "../bookings/BookingDataBox.jsx";
+import styled from 'styled-components';
+import BookingDataBox from '../bookings/BookingDataBox.jsx';
 
-import Row from "../../ui/Row";
-import Heading from "../../ui/Heading";
-import ButtonGroup from "../../ui/ButtonGroup.jsx";
-import Button from "../../ui/Button.jsx";
-import ButtonText from "../../ui/ButtonText.jsx";
+import Row from '../../ui/Row';
+import Heading from '../../ui/Heading.js';
+import ButtonGroup from '../../ui/ButtonGroup.jsx';
+import Button from '../../ui/Button.ts';
+import ButtonText from '../../ui/ButtonText.jsx';
 
-import { useMoveBack } from "../../hooks/useMoveBack.js";
+import { useMoveBack } from '../../hooks/useMoveBack.js';
 
 const Box = styled.div`
   /* Box */
@@ -22,14 +22,7 @@ function CheckinBooking() {
 
   const booking = {};
 
-  const {
-    id: bookingId,
-    guests,
-    totalPrice,
-    numGuests,
-    hasBreakfast,
-    numNights,
-  } = booking;
+  const { id: bookingId, guests, totalPrice, numGuests, hasBreakfast, numNights } = booking;
 
   function handleCheckin() {}
 
@@ -44,7 +37,10 @@ function CheckinBooking() {
 
       <ButtonGroup>
         <Button onClick={handleCheckin}>Check in booking #{bookingId}</Button>
-        <Button variation="secondary" onClick={moveBack}>
+        <Button
+          variation="secondary"
+          onClick={moveBack}
+        >
           Back
         </Button>
       </ButtonGroup>

@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import Button from "../../ui/Button.jsx";
-import FileInput from "../../ui/FileInput.jsx";
-import Form from "../../ui/Form.jsx";
-import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
+import Button from '../../ui/Button.ts';
+import FileInput from '../../ui/FileInput.jsx';
+import Form from '../../ui/Form.jsx';
+import FormRow from '../../ui/FormRow';
+import Input from '../../ui/Input';
 
-import { useUser } from "./useUser";
+import { useUser } from './useUser';
 
 function UpdateUserDataForm() {
   // We don't need the loading state, and can immediately use the user data, because we know that it has already been loaded at this point
@@ -27,7 +27,10 @@ function UpdateUserDataForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow label="Email address">
-        <Input value={email} disabled />
+        <Input
+          value={email}
+          disabled
+        />
       </FormRow>
       <FormRow label="Full name">
         <Input
@@ -45,7 +48,10 @@ function UpdateUserDataForm() {
         />
       </FormRow>
       <FormRow>
-        <Button type="reset" variation="secondary">
+        <Button
+          type="reset"
+          variation="secondary"
+        >
           Cancel
         </Button>
         <Button>Update account</Button>

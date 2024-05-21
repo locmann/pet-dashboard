@@ -1,6 +1,6 @@
-import BookingRow from "./BookingRow.jsx";
-import Table from "../../ui/Table.jsx";
-import Menus from "../../ui/Menus.jsx";
+import BookingRow from './BookingRow.jsx';
+import Table from '../../ui/Table.jsx';
+import Menus from '../../ui/Menus.jsx';
 
 function BookingTable() {
   const bookings = [];
@@ -20,7 +20,10 @@ function BookingTable() {
         <Table.Body
           data={bookings}
           render={(booking) => (
-            <BookingRow key={booking.id} booking={booking} />
+            <BookingRow
+              key={booking.id}
+              booking={booking}
+            />
           )}
         />
       </Table>
