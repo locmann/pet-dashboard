@@ -15,5 +15,5 @@ export type CabinInsertType = {
   regularPrice: number;
   discount: number;
   description: string;
-  image: string;
+  image: FileList;
 };
