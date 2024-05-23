@@ -1,10 +1,14 @@
 import styled from 'styled-components';
-
-import Input from '../../ui/Input';
-import Form from '../../ui/Form.jsx';
-import Button from '../../ui/Button.ts';
-import FileInput from '../../ui/FileInput.jsx';
-import Textarea from '../../ui/Textarea.jsx';
+import Form from 'ui/Form.ts';
+import Input from 'ui/Input.ts';
+import Textarea from 'ui/Textarea.ts';
+import FileInput from 'ui/FileInput.ts';
+import Button from 'ui/Button.ts';
+import { useForm } from 'react-hook-form';
+import { CabinInsertType } from 'features/cabins/cabinType.ts';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addCabin } from 'services/apiCabins.ts';
+import toast from 'react-hot-toast';
 
 const FormRow = styled.div`
   display: grid;
@@ -43,14 +47,40 @@ const Error = styled.span`
 `;
 
 function CreateCabinForm() {
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CabinInsertType>();
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: (cabin: CabinInsertType) => addCabin(cabin),
+    onSuccess: () => {
+      reset();
+      return queryClient.invalidateQueries(['cabins']);
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const onSubmit = (data: CabinInsertType) => {
+    //mutate(data);
+
+    console.log(data);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
         <Label htmlFor="name">Cabin name</Label>
         <Input
           type="text"
           id="name"
+          {...register('name', { required: true })}
         />
+        {errors.name && <Error>This field is required</Error>}
       </FormRow>
 
       <FormRow>
@@ -58,7 +88,9 @@ function CreateCabinForm() {
         <Input
           type="number"
           id="maxCapacity"
+          {...register('maxCapacity', { required: true, min: 1 })}
         />
+        {errors.maxCapacity && <Error>This field is required</Error>}
       </FormRow>
 
       <FormRow>
@@ -66,7 +98,9 @@ function CreateCabinForm() {
         <Input
           type="number"
           id="regularPrice"
+          {...register('regularPrice', { required: true })}
         />
+        {errors.regularPrice && <Error>This field is required</Error>}
       </FormRow>
 
       <FormRow>
@@ -75,15 +109,17 @@ function CreateCabinForm() {
           type="number"
           id="discount"
           defaultValue={0}
+          {...register('discount', { required: true })}
         />
+        {errors.discount && <Error>This field is required</Error>}
       </FormRow>
 
       <FormRow>
         <Label htmlFor="description">Description for website</Label>
         <Textarea
-          type="number"
           id="description"
           defaultValue=""
+          {...register('description')}
         />
       </FormRow>
 
@@ -92,6 +128,7 @@ function CreateCabinForm() {
         <FileInput
           id="image"
           accept="image/*"
+          {...register('image')}
         />
       </FormRow>
 
@@ -100,6 +137,7 @@ function CreateCabinForm() {
         <Button
           variation="secondary"
           type="reset"
+          onClick={() => reset()}
         >
           Cancel
         </Button>

@@ -52,8 +52,8 @@ type Size = keyof typeof sizes;
 type Variation = keyof typeof variations;
 
 interface ButtonProps {
-  size: Size;
-  variation: Variation;
+  size?: Size;
+  variation?: Variation;
 }
 
 const Button = styled.button<ButtonProps>`
@@ -61,8 +61,16 @@ const Button = styled.button<ButtonProps>`
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
-  ${({ size }) => sizes[size]}
-  ${({ variation }) => variations[variation]}
+  ${({ size }) => {
+    if (size) {
+      return sizes[size];
+    }
+  }}
+  ${({ variation }) => {
+    if (variation) {
+      return variations[variation];
+    }
+  }}
 `;
 
 Button.defaultProps = {

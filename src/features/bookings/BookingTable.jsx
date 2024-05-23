@@ -1,5 +1,5 @@
 import BookingRow from './BookingRow.jsx';
-import Table from '../../ui/Table.jsx';
+import Table from 'ui/Table.jsx';
 import Menus from '../../ui/Menus.jsx';
 
 function BookingTable() {

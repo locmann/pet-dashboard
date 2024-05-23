@@ -16,6 +16,14 @@ const StyledAppLayout = styled.div`
   grid-template-rows: auto 1fr;
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 120rem;
+  gap: 3.2rem;
+`;
+
 function AppLayout() {
   return (
     <StyledAppLayout>
@@ -23,7 +31,9 @@ function AppLayout() {
       <Sidebar />
 
       <Main>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
       </Main>
     </StyledAppLayout>
   );
