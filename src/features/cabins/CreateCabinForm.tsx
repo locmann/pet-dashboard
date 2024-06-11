@@ -66,9 +66,7 @@ function CreateCabinForm() {
   });
 
   const onSubmit = (data: CabinInsertType) => {
-    //mutate(data);
-
-    console.log(data);
+    mutate(data);
   };
 
   return (
